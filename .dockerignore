@@ -1,0 +1,78 @@
+# Exclude everything by default, then include what's needed (but for simplicity, listing excludes)
+.git/
+.gitignore
+README.md
+LICENSE
+
+# General system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Editors and IDEs
+.idea/
+.vscode/
+
+# Python virtual environments and caches
+venv/
+env/
+.venv/
+ENV/
+__pycache__/
+*.py[cod]
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Testing and coverage
+.coverage
+htmlcov/
+test-results/
+
+# Databases (don't include local DB files in image)
+*.sqlite3
+*.db
+pg_data/
+
+# Logs
+*.log
+logs/
+
+# Environment variables (sensitive, don't include in image)
+.env
+.env.*
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+
+# Documentation builds
+docs/_build/
+
+# Archives and binaries
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.dmg
+*.exe
+
+# Docker-specific ignores
+docker-compose.override.yml
+docker-data/
+
+# Additional large or temp files
+.tmp/
+.temp/
+.cache/

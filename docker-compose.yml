@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: luxury_postgres
+    environment:
+      POSTGRES_DB: luxury_db
+      POSTGRES_USER: luxury_user
+      POSTGRES_PASSWORD: luxury_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  redis:
+    image: redis:7
+    container_name: luxury_redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+volumes:
+  postgres_data:
