@@ -1,9 +1,13 @@
+from typing import List
+
+from django.http import HttpRequest, JsonResponse
 from django.urls import path
-from django.http import JsonResponse
 
-def me(_request):
-    return JsonResponse({'me': None})
 
-urlpatterns = [
-    path('me/', me, name='users-me'),
+def me(_request: HttpRequest) -> JsonResponse:
+    return JsonResponse({"me": None})
+
+
+urlpatterns: List = [
+    path("me/", me, name="users-me"),
 ]

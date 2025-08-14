@@ -1,6 +1,9 @@
-from .base import *
+from . import base
 
 DEBUG = False
+DATABASES = base.DATABASES
+INSTALLED_APPS = base.INSTALLED_APPS
+
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True

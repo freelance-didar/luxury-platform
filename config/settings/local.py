@@ -1,4 +1,6 @@
-from .base import *
+from . import base
 
 DEBUG = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DATABASES = base.DATABASES
+INSTALLED_APPS = base.INSTALLED_APPS
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
