@@ -1,21 +1,11 @@
 import os
 from pathlib import Path
-import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-env = environ.Env(
-    DJANGO_DEBUG=(bool, False),
-    DJANGO_ALLOWED_HOSTS=(list, []),
-    DJANGO_TIME_ZONE=(str, 'UTC'),
-    DJANGO_LANGUAGE_CODE=(str, 'en-us'),
-)
-
-environ.Env.read_env(BASE_DIR / '.env')
-
-SECRET_KEY = env('DJANGO_SECRET_KEY')
-DEBUG = env('DJANGO_DEBUG')
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'changeme')
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',')
 
 
 INSTALLED_APPS = [
@@ -69,15 +59,11 @@ ASGI_APPLICATION = 'config.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-        'CONN_MAX_AGE': 60,
-        'OPTIONS': {
-            'sslmode': 'prefer',
-        },
+        'NAME': os.environ.get('POSTGRES_DB'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('POSTGRES_HOST'),
+        'PORT': os.environ.get('POSTGRES_PORT'),
     }
 }
 
@@ -85,7 +71,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': env('REDIS_URL'),
+        'LOCATION': os.environ.get('REDIS_URL'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             'PARSER_CLASS': 'redis.connection.HiredisParser',
@@ -104,8 +90,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = env('DJANGO_LANGUAGE_CODE')
-TIME_ZONE = env('DJANGO_TIME_ZONE')
+LANGUAGE_CODE = os.environ.get('DJANGO_LANGUAGE_CODE')
+TIME_ZONE = os.environ.get('DJANGO_TIME_ZONE')
 USE_I18N = True
 USE_TZ = True
 
